@@ -27,7 +27,7 @@
 
 <script>
 const apiUrl = 'http://127.0.0.1:5000/v1/api';
-const apiBaseUrl = 'http://127.0.0.1:5000';
+const baseUrl = 'http://127.0.0.1:5000';
 
 let startTime = Date.now();
 let startDragTime = Date.now();
@@ -95,7 +95,7 @@ export default {
         console.log('received:');
         console.log(response.data);
         this.currentImageId = response.data.id;
-        this.currentImageUrl = `${apiBaseUrl}/${response.data.url}`;
+        this.currentImageUrl = `${baseUrl}/${response.data.url}`;
         this.newImageReady = true;
         const card = this.$refs.card;
         if (card !== undefined) {
