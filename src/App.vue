@@ -1,28 +1,44 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template id="main-page">
+  <v-ons-page>
+    <div class="center app-title">Swipe interface</div>
+    <SwipeCards msg="test"/>
+  </v-ons-page>
 </template>
 
+<style>
+  /* CSS goes here */
+</style>
+
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import SwipeCards from './components/swipeCards.vue';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld,
+    SwipeCards,
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.page__background {
+  background-color: #fff;
+}
+.page {
+  font-size: 20px;
+  font-weight: bold;
+  color: #aaa;
+}
+.center {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+.app-title {
+  margin: 30px;
+}
+.bg-green {
+  background-color: #74dda5;
+}
+.bg-red {
+  background-color: #f885ba;
 }
 </style>
