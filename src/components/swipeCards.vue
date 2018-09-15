@@ -118,7 +118,7 @@ export default {
 .box-holder {
   position: absolute;
   width: 80vw;
-  height: 80vw;
+  height: 60vh;
   left: 10vw;
   top: calc(10vw + 50px);
 }
@@ -140,6 +140,7 @@ export default {
   border: 10px solid #bbb;
   background-color: #fff;
   background-size: cover;
+  background-position: 50% 50%;
   margin: 0px;
   box-shadow: -4px 4px 16px rgba(0, 0, 0, 0.1);
 }
