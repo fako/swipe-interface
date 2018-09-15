@@ -26,8 +26,8 @@
 </template>
 
 <script>
-const apiUrl = 'http://127.0.0.1:5000/v1/api';
-const baseUrl = 'http://127.0.0.1:5000';
+const apiUrl = 'http://ec2-34-251-167-142.eu-west-1.compute.amazonaws.com/data/v1/future-fashion/annotate/';
+const baseUrl = 'http://ec2-34-251-167-142.eu-west-1.compute.amazonaws.com';
 
 let startTime = Date.now();
 let startDragTime = Date.now();
