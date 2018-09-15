@@ -13,7 +13,7 @@ import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
 
 import App from './App.vue';
-import Main from './Main.vue';
+import Home from './Home.vue';
 import Swipe from './Swipe.vue';
 
 
@@ -27,7 +27,7 @@ Vue.use(VueAxios, axios);
 
 Vue.use(VueRouter);
 const routes = [
-  { path: '/', component: Main },
+  { path: '/', component: Home },
   { path: '/swipe', component: Swipe },
 ];
 const router = new VueRouter({

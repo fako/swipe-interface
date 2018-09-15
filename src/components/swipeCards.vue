@@ -92,8 +92,14 @@ export default {
           score: currentScore
         }
       ).then((response) => {
+        if (response.status === 204) {
+          this.$router.push('/');
+          return;
+        }
+
         console.log('received:');
         console.log(response.data);
+
         this.currentImageId = response.data.id;
         this.currentImageUrl = `${baseUrl}/${response.data.url}`;
         this.newImageReady = true;
