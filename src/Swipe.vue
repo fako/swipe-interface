@@ -2,22 +2,23 @@
   <v-ons-page>
     <div class="center app-title">Swipe interface</div>
     <SwipeCards msg="test"/>
+    <SwipeCards msg="test"/>
   </v-ons-page>
 </template>
-
-<style>
-  /* CSS goes here */
-</style>
 
 <script>
 import SwipeCards from './components/swipeCards.vue';
 
 export default {
   name: 'swipe',
+  mounted: function mounted() {
+    console.log(this.$route.query);
+  },
   components: {
     SwipeCards,
-  },
+  }
 };
+
 </script>
 
 <style>
