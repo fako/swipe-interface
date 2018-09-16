@@ -1,6 +1,13 @@
 <template id="swipe-page">
   <v-ons-page>
-    <div class="center app-title">Swipe interface</div>
+    <div id="header">
+      <div class="center app-title">
+        Set Matching Test
+      </div>
+      <v-ons-fab position='middle right' modifier="mini" v-on:click="" class="like-fab">
+        <v-ons-icon icon="md-thumb-up"></v-ons-icon>
+      </v-ons-fab>
+    </div>
     <SwipeCards msg="test"/>
     <SwipeCards msg="test"/>
   </v-ons-page>
@@ -29,17 +36,25 @@ export default {
   font-size: 20px;
   font-weight: bold;
   color: #aaa;
+  margin-top: 55px;
 }
 .center {
   text-align: center;
 }
-.app-title {
-  margin: 30px;
+#header {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  padding: 15px 0;
+  border-bottom: 1px solid lightgray;
 }
-.bg-green {
-  background-color: #74dda5;
+.cards-container {
+  position: relative;
 }
-.bg-red {
-  background-color: #f885ba;
+.like-fab {
+  position: absolute;
+  right: 7px;
+  top: 7px;
 }
 </style>

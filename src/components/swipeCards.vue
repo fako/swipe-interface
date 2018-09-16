@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="card-stack, box-holder">
+  <div class="swipe-cards">
+    <div class="card-stack box-holder">
       <div class="box bg"></div>
       <vue-swing
         @throwout="onThrowout"
@@ -14,13 +14,12 @@
           :style="{ backgroundImage: `url('${currentImageUrl}')` }"
         ></div>
       </vue-swing>
-      <div v-if="newImageReady" class="image-label">#{{ currentImageId }}</div>
     </div>
-    <v-ons-fab position='bottom right' v-on:click="like" class="bg-green">
-      <v-ons-icon icon="md-thumb-up"></v-ons-icon>
+    <v-ons-fab v-on:click="like" class="carousel-control left">
+      <v-ons-icon icon="md-arrow-left"></v-ons-icon>
     </v-ons-fab>
-    <v-ons-fab position='bottom left' v-on:click="dislike" class="bg-red">
-      <v-ons-icon icon="md-thumb-down"></v-ons-icon>
+    <v-ons-fab v-on:click="dislike" class="carousel-control right">
+      <v-ons-icon icon="md-arrow-right"></v-ons-icon>
     </v-ons-fab>
   </div>
 </template>
@@ -115,12 +114,15 @@ export default {
 </script>
 
 <style scoped>
+.swipe-cards {
+  position: relative;
+}
 .box-holder {
-  position: absolute;
+  position: relative;
   width: 80vw;
   height: 60vh;
   left: 10vw;
-  top: calc(10vw + 50px);
+  margin-top: 15px;
 }
 @media screen and (orientation: landscape) {
   .box-holder {
@@ -147,9 +149,18 @@ export default {
 .box.bg {
   background-color: #f3f3f3;
 }
-.image-label {
+.carousel-control {
   position: absolute;
-  bottom: -50px;
+  bottom: 20px;
+  display: inline-block;
+  background-color: lightgray;
+}
+.carousel-control.right {
+  right: 15px;
+  float: right;
+}
+.carousel-control.left {
+  left: 15px;
 }
 @media screen and (orientation: landscape) {
   .image-label {
