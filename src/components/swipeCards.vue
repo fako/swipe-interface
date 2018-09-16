@@ -26,7 +26,7 @@
 
 <script>
 const apiUrl = 'http://2ndhandstylist.com/data/v1/future-fashion/annotate/';
-const baseUrl = 'http://2ndhandstylist';
+const baseUrl = 'http://2ndhandstylist.com';
 
 let startTime = Date.now();
 let startDragTime = Date.now();
