@@ -25,8 +25,8 @@
 </template>
 
 <script>
-const apiUrl = 'http://ec2-34-251-167-142.eu-west-1.compute.amazonaws.com/data/v1/future-fashion/annotate/';
-const baseUrl = 'http://ec2-34-251-167-142.eu-west-1.compute.amazonaws.com';
+const apiUrl = 'http://2ndhandstylist.com/data/v1/future-fashion/annotate/';
+const baseUrl = 'http://2ndhandstylist';
 
 let startTime = Date.now();
 let startDragTime = Date.now();
