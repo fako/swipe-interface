@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "rm -rf dist/${npm_package_version} && vue-cli-service build --dest=.tmp && mkdir -p dist && mv .tmp/ dist/${npm_package_version}",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
