@@ -8,8 +8,8 @@
         <v-ons-icon icon="md-thumb-up"></v-ons-icon>
       </v-ons-fab>
     </div>
-    <SwipeCards msg="test"/>
-    <SwipeCards msg="test"/>
+    <SwipeCards type="top" :top="topColor" :bottom="bottomColor"/>
+    <SwipeCards type="bottom" :top="topColor" :bottom="bottomColor"/>
   </v-ons-page>
 </template>
 
@@ -18,8 +18,11 @@ import SwipeCards from './components/swipeCards.vue';
 
 export default {
   name: 'swipe',
-  mounted: function mounted() {
-    console.log(this.$route.query);
+  data() {
+    return {
+      topColor: this.$route.query.top,
+      bottomColor: this.$route.query.bottom
+    }
   },
   components: {
     SwipeCards,

@@ -26,9 +26,7 @@
 
 <script>
 const apiUrl = 'http://2ndhandstylist.com/data/v1/future-fashion/annotate/';
-const baseUrl = 'http://2ndhandstylist.com';
 
-let startTime = Date.now();
 let startDragTime = Date.now();
 let currentLike = null;
 let currentScore = null;
@@ -51,7 +49,9 @@ export default {
     };
   },
   props: {
-    msg: String,
+    type: String,
+    top: String,
+    bottom: String
   },
   beforeMount () {
     this.getImage();
@@ -89,7 +89,14 @@ export default {
           id: this.currentImageId,
           like: currentLike,
           score: currentScore
-        }
+        },
+        {
+          params: {
+            type: this.type,
+            $top: this.top,
+            $bottom: this.bottom
+          }
+        },
       ).then((response) => {
         if (response.status === 204) {
           this.$router.push('/');
@@ -100,7 +107,7 @@ export default {
         console.log(response.data);
 
         this.currentImageId = response.data.id;
-        this.currentImageUrl = `${baseUrl}/${response.data.url}`;
+        this.currentImageUrl = response.data.url;
         this.newImageReady = true;
         const card = this.$refs.card;
         if (card !== undefined) {

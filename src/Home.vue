@@ -10,7 +10,7 @@ export default {
   name: 'home',
   methods: {
     showClothes() {
-      this.$router.push({ path: '/swipe', query: { top: '000', bottom: 'fff' } });
+      this.$router.push({ path: '/swipe', query: { top: 'F8F572', bottom: 'F58C55' } });
     }
   }
 };
