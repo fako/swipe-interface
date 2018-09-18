@@ -1,6 +1,9 @@
 <template id="swipe-page">
   <v-ons-page>
     <div id="header">
+      <v-ons-fab position='middle left' modifier="mini" v-on:click="goHome" class="back-fab">
+        <v-ons-icon icon="md-chevron-left"></v-ons-icon>
+      </v-ons-fab>
       <div class="center app-title">
         Set Matching Test
       </div>
@@ -22,6 +25,17 @@ export default {
     return {
       topColor: this.$route.query.top,
       bottomColor: this.$route.query.bottom
+    }
+  },
+  methods: {
+    likeMatch() {
+        console.log('clicked', this.topColor, this.bottomColor);
+    },
+    goHome() {
+      this.$router.push('/');
+    },
+    onSwipe(event) {
+      console.log('swiped', event);
     }
   },
   components: {
@@ -59,5 +73,11 @@ export default {
   position: absolute;
   right: 7px;
   top: 7px;
+}
+.back-fab {
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  background-color: lightgrey;
 }
 </style>
