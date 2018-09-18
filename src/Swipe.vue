@@ -7,12 +7,12 @@
       <div class="center app-title">
         Set Matching Test
       </div>
-      <v-ons-fab position='middle right' modifier="mini" v-on:click="" class="like-fab">
+      <v-ons-fab position='middle right' modifier="mini" v-on:click="likeMatch" class="like-fab">
         <v-ons-icon icon="md-thumb-up"></v-ons-icon>
       </v-ons-fab>
     </div>
-    <SwipeCards type="top" :top="topColor" :bottom="bottomColor"/>
-    <SwipeCards type="bottom" :top="topColor" :bottom="bottomColor"/>
+    <SwipeCards type="top" :top="topColor" :bottom="bottomColor" v-on:input="onSelect($event)"/>
+    <SwipeCards type="bottom" :top="topColor" :bottom="bottomColor" v-on:input="onSelect($event)"/>
   </v-ons-page>
 </template>
 
@@ -24,18 +24,29 @@ export default {
   data() {
     return {
       topColor: this.$route.query.top,
-      bottomColor: this.$route.query.bottom
+      bottomColor: this.$route.query.bottom,
+      clothingSet: {}
     }
   },
   methods: {
     likeMatch() {
-        console.log('clicked', this.topColor, this.bottomColor);
+      this.axios.post(
+        'http://2ndhandstylist.com/data/v1/future-fashion/color-clothing-set/',
+        {
+          top_color: this.topColor,
+          bottom_color: this.bottomColor,
+          top_item: this.clothingSet['top'],
+          bottom_item: this.clothingSet['bottom']
+        }
+      ).then((response) => {
+        alert('Thank you for your feedback!');
+      });
     },
     goHome() {
       this.$router.push('/');
     },
-    onSwipe(event) {
-      console.log('swiped', event);
+    onSelect(event) {
+      this.clothingSet[event.type] = event.id;
     }
   },
   components: {

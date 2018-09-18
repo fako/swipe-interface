@@ -98,16 +98,13 @@ export default {
           }
         },
       ).then((response) => {
-        if (response.status === 204) {
-          this.$router.push('/');
-          return;
-        }
 
         console.log('received:');
         console.log(response.data);
 
         this.currentImageId = response.data.id;
         this.currentImageUrl = response.data.url;
+        this.$emit('input', {type: this.type, id: this.currentImageId});
         this.newImageReady = true;
         const card = this.$refs.card;
         if (card !== undefined) {
