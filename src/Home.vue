@@ -35,7 +35,7 @@ export default {
     	let top = this.hex.slice(1);
     	let bottom = this.secondColors[ix].slice(1);
     	console.log(top, bottom);
-      // this.$router.push({ path: '/swipe', query: { top , bottom } });
+        this.$router.push({ path: '/swipe', query: { top , bottom } });
     },
     selectColor(event) {
     	this.hex= event.hex;
