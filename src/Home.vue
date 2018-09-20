@@ -1,34 +1,80 @@
 <template id="main-page">
-  <div id="home">
-  	<center>
-  	<br>
-	<font face="verdana">Pick a color for your top</font><br><br>
-	<chrome-picker :value="colors" @input="selectColor"></chrome-picker><br>
-	<svg id="svg1" xmlns="http://www.w3.org/2000/svg" style="width: 100px; height: 100px">
-		<g class="g0">
-			<g class="g01">
-  				<rect id="rect-top" width="100" height="100" v-bind:style="{fill: hex }"/>
-  			</g>
-  			<g class="g02">
-            <foreignObject width="100" height="100">
-                <img src="src/assets/topmask.png"> <!-- op de een of andere manier laadt hij dit plaatje niet. Het lukte wel met een ander random plaatje van het web dus de manier van de code opzetten werkt wel. Zou ook moeten werken voor de bottom.
-                Het zou ook mooi zijn als het t-shirt naast de color pickers verscheen ipv eronder. -->
-            </foreignObject>
-        	</g>
-        </g>
-  	</svg>
-	<br><br>
-	<a v-on:click="monochromaticColor()">
-		<section style="margin: 16px">
-      		<v-ons-button modifier="large" style="margin: 6px 0">Give me a monochrome color for the bottom!</v-ons-button> <!-- Ik kon niet vinden hoe ik deze button dezelfde kleur kon geven als de kleur die er random wordt gegenereerd. Ik zag niks staan in de documentatie van Ons hierover, heb geprobeerd te zoeken naar "normale" javascript buttons waarmee dit kan maar is niet gelukt. -->
-    	</section>
-	</a>
+
+
+
+  <v-ons-page>
+	<div id="header">
+	  <div class="center app-title">
+		Set Matching Test
+	  </div>
+	</div>
+	<v-ons-list>
+      <v-ons-list-item>
+        <div><span class="title-number">1.)</span>Pick a color for your top</div>
+	  </v-ons-list-item>
+	  <v-ons-list-item>
+		<chrome-picker :value="colors" @input="selectColor"></chrome-picker>
+		  <!--<svg id="svg1" xmlns="http://www.w3.org/2000/svg" style="width: 100px; height: 100px">-->
+			  <!--<g class="g0">-->
+				  <!--<g class="g01">-->
+					  <!--<rect id="rect-top" width="100" height="100" v-bind:style="{fill: hex }"/>-->
+				  <!--</g>-->
+				  <!--<g class="g02">-->
+					  <!--<foreignObject width="100" height="100">-->
+						  <!--<img src="assets/topmask.png">-->
+					  <!--</foreignObject>-->
+				  <!--</g>-->
+			  <!--</g>-->
+		  <!--</svg>-->
+      </v-ons-list-item>
+	  <v-ons-list-item>
+		<div><span class="title-number">2.)</span>Pick a color for your bottom</div>
+	  </v-ons-list-item>
+	  <v-ons-list-item>
+		<v-ons-row class="color-button-row">
+		  <v-ons-col width="33%">
+		    <v-ons-button class="color-button"></v-ons-button>
+		  </v-ons-col>
+		  <v-ons-col width="33%">
+			<v-ons-button class="color-button"></v-ons-button>
+		  </v-ons-col>
+		  <v-ons-col width="33%">
+		    <v-ons-button class="color-button"></v-ons-button>
+		  </v-ons-col>
+		</v-ons-row>
+	    <v-ons-row class="color-button-row">
+		  <v-ons-col width="33%">
+			<v-ons-button class="color-button"></v-ons-button>
+		  </v-ons-col>
+		  <v-ons-col width="33%">
+			<v-ons-button class="color-button"></v-ons-button>
+		  </v-ons-col>
+		  <v-ons-col width="33%">
+			<v-ons-button class="color-button"></v-ons-button>
+		  </v-ons-col>
+	    </v-ons-row>
+			<!--<a v-on:click="monochromaticColor()">-->
+				<!--<section style="margin: 16px">-->
+					<!--<v-ons-button modifier="large" style="margin: 6px 0">Give me a monochrome color for the bottom!</v-ons-button> &lt;!&ndash; Ik kon niet vinden hoe ik deze button dezelfde kleur kon geven als de kleur die er random wordt gegenereerd. Ik zag niks staan in de documentatie van Ons hierover, heb geprobeerd te zoeken naar "normale" javascript buttons waarmee dit kan maar is niet gelukt. &ndash;&gt;-->
+				<!--</section>-->
+			<!--</a>-->
+	  </v-ons-list-item>
+	  <v-ons-list-item>
+		<div><span class="title-number">3.)</span>Search for clothing sets and like them</div>
+	  </v-ons-list-item>
+	  <v-ons-list-item>
+		<v-ons-button class="start-button" @click="showClothes()">Start!</v-ons-button>
+	  </v-ons-list-item>
+	</v-ons-list>
+
+
 	<br><br>
 	<a v-on:click="complementaryColor()">Give me a complementary color for the bottom!</a>
 	<br><br>
-    <a v-on:click="showClothes()">Show clothes!</a>
-	</center>
-  </div>
+
+
+  </v-ons-page>
+
 
 </template>
 
@@ -60,12 +106,12 @@ export default {
     	this.hex= event.hex;
     },
     monochromaticColor() {
-    	let colors = tinycolor(this.hex).monochromatic(); 
+    	let colors = tinycolor(this.hex).monochromatic();
     	colors = colors.map(function(t) { return t.toHexString(); });
     	this.secondColors = colors;
     },
     complementaryColor() {
-    	let colors = tinycolor(this.hex).triad(); 
+    	let colors = tinycolor(this.hex).triad();
     	colors = colors.map(function(t) { return t.toHexString(); });
     	this.secondColors = colors;
     }
@@ -73,7 +119,7 @@ export default {
   data () {
     return {
       colors,
-      hex:'',
+      hex: colors.hex,
       secondColors: []
     };
   },
@@ -83,7 +129,7 @@ export default {
 };
 
 let colors = {
-  hex: '#000000',
+  hex: '#000000',  // TODO: update
   hsl: { h: 150, s: 0.5, l: 0.2, a: 1 },
   hsv: { h: 150, s: 0.66, v: 0.30, a: 1 },
   rgba: { r: 25, g: 77, b: 51, a: 1 },
@@ -93,5 +139,23 @@ let colors = {
 </script>
 
 <style>
-
+.vc-chrome {
+  margin: 0 auto;
+}
+.vc-chrome .vc-chrome-fields-wrap {
+  display: none;
+}
+.title-number {
+	padding-right: 20px;
+}
+.color-button {
+  width: 50%;
+  height: 40px;
+}
+.color-button-row {
+  margin-bottom: 10px;
+}
+.start-button {
+  margin: 0 auto;
+}
 </style>

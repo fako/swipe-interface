@@ -22,7 +22,7 @@
 
         <v-ons-list>
           <v-ons-list-item>
-            <p>Thank you for helping is out. If you want we can contact you about this clothing set.</p>
+            <p>Thank you for helping us out. If you want we can contact you about this clothing set.</p>
           </v-ons-list-item>
           <v-ons-list-item>
             <div class="center">
