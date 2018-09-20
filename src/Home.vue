@@ -1,7 +1,4 @@
 <template id="main-page">
-
-
-
   <v-ons-page>
 	<div id="header">
 	  <div class="center app-title">
@@ -33,24 +30,21 @@
 	  <v-ons-list-item>
 		<v-ons-row class="color-button-row">
 		  <v-ons-col width="33%">
-		    <v-ons-button class="color-button"></v-ons-button>
+		    <v-ons-radio class="color-button" v-bind:style="{background: monoColors[1]}" v-model="bottomColor" :value="monoColors[1]"></v-ons-radio>
 		  </v-ons-col>
 		  <v-ons-col width="33%">
-			<v-ons-button class="color-button"></v-ons-button>
+			<v-ons-radio class="color-button" v-bind:style="{background: monoColors[5]}" v-model="bottomColor" :value="monoColors[5]"></v-ons-radio>
 		  </v-ons-col>
 		  <v-ons-col width="33%">
-		    <v-ons-button class="color-button"></v-ons-button>
+		    <v-ons-radio class="color-button" v-bind:style="{background: monoColors[3]}" v-model="bottomColor" :value="monoColors[3]"></v-ons-radio>
 		  </v-ons-col>
 		</v-ons-row>
 	    <v-ons-row class="color-button-row">
 		  <v-ons-col width="33%">
-			<v-ons-button class="color-button"></v-ons-button>
+			<v-ons-radio class="color-button" v-bind:style="{background: complimentaryColors[1]}" v-model="bottomColor" :value="complimentaryColors[1]"></v-ons-radio>
 		  </v-ons-col>
 		  <v-ons-col width="33%">
-			<v-ons-button class="color-button"></v-ons-button>
-		  </v-ons-col>
-		  <v-ons-col width="33%">
-			<v-ons-button class="color-button"></v-ons-button>
+			<v-ons-radio class="color-button" v-bind:style="{background: complimentaryColors[2]}" v-model="bottomColor" :value="complimentaryColors[2]"></v-ons-radio>
 		  </v-ons-col>
 	    </v-ons-row>
 			<!--<a v-on:click="monochromaticColor()">-->
@@ -63,64 +57,55 @@
 		<div><span class="title-number">3.)</span>Search for clothing sets and like them</div>
 	  </v-ons-list-item>
 	  <v-ons-list-item>
-		<v-ons-button class="start-button" @click="showClothes()">Start!</v-ons-button>
+		<v-ons-button class="start-button" @click="showClothes()">Start !</v-ons-button>
 	  </v-ons-list-item>
 	</v-ons-list>
-
-
-	<br><br>
-	<a v-on:click="complementaryColor()">Give me a complementary color for the bottom!</a>
-	<br><br>
-
-
   </v-ons-page>
-
-
 </template>
 
 <script>
-
-// document.getElementById("home").style.overflow = "scroll"; <!-- de pagina scrollt nog steeds niet. Volgens mij zag ik dat je het wel in jouw document had opgelost. Dit was hoeveer ik was gekomen met mijn poging. Ik denk dat ik vaak de opbouw van de documenenten nog niet helemaal snap en daarom niet snap waar ik in de code iets moet veranderen of waar ik naar moet verwijzen. -->
 
 import { Chrome } from 'vue-color';
 
 import tinycolor from 'tinycolor2';
 
-import _ from 'lodash';
-
 export default {
   name: 'home',
   methods: {
     showClothes() {
-    	if (!this.secondColors.length) {
-    		alert('Please pick a color and choose for a complementary or monochromatic ("ton sur ton") second color.');
-    		return;
-    	}
-    	let ix = _.random(1, this.secondColors.length-1);
-    	let top = this.hex.slice(1);
-    	let bottom = this.secondColors[ix].slice(1);
-    	console.log(top, bottom);
-        this.$router.push({ path: '/swipe', query: { top , bottom } });
+	  let top = this.topColor.slice(1);
+	  let bottom = this.bottomColor.slice(1);
+	  this.$router.push({ path: '/swipe', query: { top , bottom } });
     },
     selectColor(event) {
-    	this.hex= event.hex;
+	  this.topColor = event.hex;
+	  this.setMonochromaticColor();
+	  this.setComplementaryColor();
     },
-    monochromaticColor() {
-    	let colors = tinycolor(this.hex).monochromatic();
-    	colors = colors.map(function(t) { return t.toHexString(); });
-    	this.secondColors = colors;
+    setMonochromaticColor() {
+	  let colors = tinycolor(this.topColor).monochromatic();
+	  colors = colors.map(function(t) { return t.toHexString(); });
+	  this.monoColors = colors;
     },
-    complementaryColor() {
-    	let colors = tinycolor(this.hex).triad();
-    	colors = colors.map(function(t) { return t.toHexString(); });
-    	this.secondColors = colors;
+    setComplementaryColor() {
+	  let colors = tinycolor(this.topColor).tetrad();
+	  colors = colors.map(function(t) { return t.toHexString(); });
+	  this.complimentaryColors = colors;
     }
+  },
+  mounted() {
+    this.selectColor(this.colors);
+    this.bottomColor = this.monoColors[1];
   },
   data () {
     return {
-      colors,
-      hex: colors.hex,
-      secondColors: []
+      colors: {
+	    hex: '#19D376'
+      },
+      topColor: '',  // set during mount
+	  bottomColor: '',  // set during mount
+      monoColors: [],
+      complimentaryColors: [],
     };
   },
   components: {
@@ -128,17 +113,12 @@ export default {
   }
 };
 
-let colors = {
-  hex: '#000000',  // TODO: update
-  hsl: { h: 150, s: 0.5, l: 0.2, a: 1 },
-  hsv: { h: 150, s: 0.66, v: 0.30, a: 1 },
-  rgba: { r: 25, g: 77, b: 51, a: 1 },
-  a: 1
-};
+
 
 </script>
 
 <style>
+
 .vc-chrome {
   margin: 0 auto;
 }
@@ -149,8 +129,9 @@ let colors = {
 	padding-right: 20px;
 }
 .color-button {
-  width: 50%;
+  width: 60px;
   height: 40px;
+  text-align: center;
 }
 .color-button-row {
   margin-bottom: 10px;
@@ -158,4 +139,10 @@ let colors = {
 .start-button {
   margin: 0 auto;
 }
+:checked + .radio-button__checkmark {
+  background: white;
+  margin-top: 7px;
+  border: 1px solid #0076ff;
+}
+
 </style>

@@ -11,7 +11,7 @@
       >
         <div
           v-if="newImageReady" class="box card" ref="card"
-          :style="{ backgroundImage: `url('${currentImageUrl}')`, 'border-color': '#' + this[type] }"
+          :style="{ backgroundImage: `url('${currentImageUrl}')` }"
         ></div>
       </vue-swing>
     </div>
