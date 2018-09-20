@@ -2,18 +2,10 @@
   <div class="swipe-cards">
     <div class="card-stack box-holder">
       <div class="box bg"></div>
-      <vue-swing
-        @throwout="onThrowout"
-        @dragstart="onDragStart"
-        @throwoutend="onThrowoutEnd"
-        :config="swingConfig"
-        ref="vueswing"
-      >
         <div
           v-if="newImageReady" class="box card" ref="card"
           :style="{ backgroundImage: `url('${currentImageUrl}')` }"
         ></div>
-      </vue-swing>
     </div>
     <v-ons-fab v-on:click="like" class="carousel-control left">
       <v-ons-icon icon="md-arrow-left"></v-ons-icon>
