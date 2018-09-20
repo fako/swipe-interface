@@ -1,5 +1,6 @@
 <template id="swipe-page">
   <v-ons-page>
+
     <div id="header">
       <v-ons-fab position='middle left' modifier="mini" v-on:click="goHome" class="back-fab">
         <v-ons-icon icon="md-chevron-left"></v-ons-icon>
@@ -11,8 +12,37 @@
         <v-ons-icon icon="md-thumb-up"></v-ons-icon>
       </v-ons-fab>
     </div>
+
     <SwipeCards type="top" :top="topColor" :bottom="bottomColor" v-on:input="onSelect($event)"/>
     <SwipeCards type="bottom" :top="topColor" :bottom="bottomColor" v-on:input="onSelect($event)"/>
+
+    <v-ons-dialog :visible.sync="modalVisible" cancelable>
+      <v-ons-toolbar inline><div class="center">Send feedback</div></v-ons-toolbar>
+      <form action="#" method="post">
+
+        <v-ons-list>
+          <v-ons-list-item>
+            <p>Thank you for helping is out. If you want we can contact you about this clothing set.</p>
+          </v-ons-list-item>
+          <v-ons-list-item>
+            <div class="center">
+              <label for="email">Email:</label>
+              <v-ons-input input-id="email" type="email" name="email" required v-model="email"/>
+            </div>
+          </v-ons-list-item>
+          <v-ons-list-item>
+            <v-ons-checkbox input-id="privacy" type="checkbox" name="privacy" required v-modal="privacy"/>
+            <label for="privacy">I agree to be contacted once through my email address</label>
+          </v-ons-list-item>
+
+          <v-ons-list-item>
+            <v-ons-button>Cancel</v-ons-button>
+            <v-ons-button>Send</v-ons-button>
+          </v-ons-list-item>
+        </v-ons-list>
+      </form>
+    </v-ons-dialog>
+
   </v-ons-page>
 </template>
 
@@ -25,11 +55,15 @@ export default {
     return {
       topColor: this.$route.query.top,
       bottomColor: this.$route.query.bottom,
-      clothingSet: {}
+      clothingSet: {},
+      modalVisible: false,
+      email: '',
+      privacy: false
     }
   },
   methods: {
     likeMatch() {
+      //this.modalVisible = true;
       this.axios.post(
         'http://2ndhandstylist.com/data/v1/future-fashion/color-clothing-set/',
         {
@@ -39,7 +73,7 @@ export default {
           bottom_item: this.clothingSet['bottom']
         }
       ).then((response) => {
-        alert('Thank you for your feedback!');
+          this.$ons.notification.alert("Thank you for your feedback");
       });
     },
     goHome() {
@@ -50,7 +84,7 @@ export default {
     }
   },
   components: {
-    SwipeCards,
+    SwipeCards
   }
 };
 
