@@ -1,13 +1,11 @@
 <template id="main-page">
   <v-ons-page>
-	<div id="header">
-	  <div class="center app-title">
-		Set Matching Test
-	  </div>
-	</div>
+	<v-ons-toolbar>
+	  <div class="center">Set Matching Test</div>
+	</v-ons-toolbar>
 	<v-ons-list>
       <v-ons-list-item>
-        <div><span class="title-number">1.)</span>Pick a color for your top</div>
+        <div class="title-text"><span class="title-number">1.)</span>Pick a color for your top</div>
 	  </v-ons-list-item>
 	  <v-ons-list-item>
 		<chrome-picker :value="colors" @input="selectColor"></chrome-picker>
@@ -25,7 +23,7 @@
 		  <!--</svg>-->
       </v-ons-list-item>
 	  <v-ons-list-item>
-		<div><span class="title-number">2.)</span>Pick a color for your bottom</div>
+		<div class="title-text"><span class="title-number">2.)</span>Pick a color for your bottom</div>
 	  </v-ons-list-item>
 	  <v-ons-list-item>
 		<v-ons-row class="color-button-row">
@@ -54,7 +52,7 @@
 			<!--</a>-->
 	  </v-ons-list-item>
 	  <v-ons-list-item>
-		<div><span class="title-number">3.)</span>Search for clothing sets and like them</div>
+		<div class="title-text"><span class="title-number">3.)</span>Search for clothing sets and like them</div>
 	  </v-ons-list-item>
 	  <v-ons-list-item>
 		<v-ons-button class="start-button" @click="showClothes()">Start !</v-ons-button>
@@ -126,7 +124,7 @@ export default {
   display: none;
 }
 .title-number {
-	padding-right: 20px;
+  padding-right: 20px;
 }
 .color-button {
   width: 60px;
@@ -143,6 +141,9 @@ export default {
   background: white;
   margin-top: 7px;
   border: 1px solid #0076ff;
+}
+.title-text {
+  font-size: 17px;
 }
 
 </style>

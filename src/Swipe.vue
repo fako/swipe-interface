@@ -1,17 +1,15 @@
 <template id="swipe-page">
   <v-ons-page>
 
-    <div id="header">
-      <v-ons-fab position='middle left' modifier="mini" v-on:click="goHome" class="back-fab">
-        <v-ons-icon icon="md-chevron-left"></v-ons-icon>
-      </v-ons-fab>
-      <div class="center app-title">
-        Set Matching Test
+    <v-ons-toolbar>
+      <div class="left">
+        <v-ons-toolbar-button v-on:click="goHome" icon="md-chevron-left" modifier="outline"></v-ons-toolbar-button>
       </div>
-      <v-ons-fab position='middle right' modifier="mini" v-on:click="likeMatch" class="like-fab">
-        <v-ons-icon icon="md-thumb-up"></v-ons-icon>
-      </v-ons-fab>
-    </div>
+      <div class="center">Set Matching Test</div>
+      <div class="right">
+        <v-ons-toolbar-button icon="md-thumb-up" v-on:click="likeMatch" modifier="outline"></v-ons-toolbar-button>
+      </div>
+    </v-ons-toolbar>
 
     <SwipeCards type="top" :top="topColor" :bottom="bottomColor" v-on:input="onSelect($event)"/>
     <SwipeCards type="bottom" :top="topColor" :bottom="bottomColor" v-on:input="onSelect($event)"/>
@@ -91,6 +89,10 @@ export default {
 </script>
 
 <style>
+.ons-icon {
+  width: 20px;
+  text-align: center;
+}
 .page__background {
   background-color: #fff;
 }
@@ -98,18 +100,9 @@ export default {
   font-size: 20px;
   font-weight: bold;
   color: #aaa;
-  margin-top: 55px;
 }
 .center {
   text-align: center;
-}
-#header {
-  position: fixed;
-  top: 0;
-  z-index: 10;
-  width: 100%;
-  padding: 15px 0;
-  border-bottom: 1px solid lightgray;
 }
 .cards-container {
   position: relative;
